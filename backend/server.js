@@ -9,6 +9,14 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors());
+// Serve Frontend Build
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// Catch-all route for React frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
+
 app.use(express.json());
 
 // Create 'uploads' folder if not exists
